@@ -56,8 +56,6 @@ function CheckoutForm() {
       
       
       }),
-      
-
 
     });
     if(response.ok) {
@@ -69,6 +67,7 @@ function CheckoutForm() {
     if (!response.ok) {
       setError(response.statusText);
       console.log("unsuccesful payment")
+      alert('Try again')
 
     }
 

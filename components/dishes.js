@@ -11,8 +11,10 @@ import {
   CardTitle,
   Row,
   Col} from "reactstrap";
-function Dishes({restId}){
+
+  function Dishes({restId, restaurants, selectedDish}){
   const [restaurantID, setRestaurantID] = useState()
+
   const {addItem} = useContext(AppContext)
 
 const GET_RESTAURANT_DISHES = gql`
@@ -44,8 +46,38 @@ const GET_RESTAURANT_DISHES = gql`
   if (!data) return <p>Not found</p>;
 
   let restaurant = data.restaurant;
+ console.log(selectedDish , restId)
+if( selectedDish){
+  return(
+  <Col xs="6" sm="4" style={{ padding: 0 }} key={selectedDish.id}>
+  <Card style={{ margin: "0 10px" }}>
+    <CardImg
+      top={true}
+    
+      style={{ height: 200 }}
+      
+      src={`http://localhost:1337${selectedDish.image.url}`}
+    />
+    <CardBody>
+      <CardTitle>{selectedDish.name}</CardTitle>
+      <CardText style={{ fontFamily: 'Work Sans'}}>{selectedDish.description}</CardText>
+    </CardBody>
+    <div className="card-footer">
+      <Button color="info"
+        outline
+        // color="primary"
+        onClick = {()=> addItem(selectedDish)}
+      >
+        + Add To Cart
+      </Button>
+      
+    </div>
+  </Card>
+</Col>
+  )
 
-  if (restId > 0){
+}
+  if (restId > 0 && restaurant?.dishes) {
 
     return (
       <>
@@ -79,7 +111,7 @@ const GET_RESTAURANT_DISHES = gql`
         </>
         )}
         else{
-          return <h1> No Dishes</h1>
+          return <h4></h4>
         }
     }
     export default Dishes

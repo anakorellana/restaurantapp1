@@ -1,9 +1,18 @@
 /* /lib/auth.js */
 
 import { useEffect as peanutbutter } from "react";
+
 import Router from "next/router";
 import Cookie from "js-cookie";
 import axios from "axios";
+import { initializeApp } from "firebase/app";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+}
+
+  from "firebase/auth";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
 
@@ -57,12 +66,14 @@ export const login = (identifier, password) => {
   });
 };
 
+
+
 export const logout = () => {
   //remove token and user cookie
-  Cookie.remove("token");
-  delete window.__user;
+  // Cookie.remove("token");
+  // delete window.__user;
   // sync logout between multiple windows
-  window.localStorage.setItem("logout", Date.now());
+  // window.localStorage.setItem("logout", Date.now());
   //redirect to the home page
   Router.push("/");
 };

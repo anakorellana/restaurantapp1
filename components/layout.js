@@ -3,7 +3,7 @@
 import React, { useContext, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { logout } from "./auth";
+// import { logout } from "./auth";
 import { Container, Nav, NavItem } from "reactstrap";
 import Examplepopup from "./popUp";
 import AppContext from "./context";
@@ -73,7 +73,7 @@ return (
             
             {user? (
                <Link href="#">
-              <a className="nav-link" style={{ fontFamily: 'Work Sans'}}>Hi {user.username}!</a>
+              <a className="nav-link" style={{ fontFamily: 'Work Sans'}}>Hi {user.username || user.displayName}!</a>
               </Link>
             ) : (
               <Link href="/register">
@@ -102,6 +102,7 @@ return (
           </NavItem>
         </Nav>
       </header>
+     
       <Container>{props.children}</Container>
       {user && <Examplepopup showModal={show} setShow={setShow}/>}
     </div>

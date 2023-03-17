@@ -2,7 +2,7 @@
 
 import React, { useState, useContext } from "react";
 import Popup from 'reactjs-popup';
-import Popuptwo from "../components/popuptwo";
+// import Popuptwo from "../components/popuptwo";
 import { Toast} from 'react-bootstrap';
 import 'reactjs-popup/dist/index.css';
 

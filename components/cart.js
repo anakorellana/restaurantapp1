@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
 import { useRouter } from "next/router";
 import { Button, Card, CardBody, CardTitle, Badge } from "reactstrap";
+
 import AppContext from "./context"
 import Link from "next/link"
 // we can pass cart data in via props method 
 // the alternative is using useContext as below
 function Cart() {
   let isAuthenticated = true;
-  let {cart,addItem,removeItem} = useContext(AppContext);
+  let {cart,user,addItem,removeItem} = useContext(AppContext);
+  
   //const [cartA, setCartA] = useState({cart})
   //cart = value.cart;
   //console.log('props:'+ JSON.stringify(value));
@@ -80,7 +82,7 @@ const checkoutItems = ()=>{
         <h3>${cart.total}</h3>
       </Badge>
           <Link href="/checkout/">
-            <Button style={{ width: "60%" }} color="primary">
+            <Button style={{ width: "60%", backgroundColor: "#063831"  }} >
               <a>Order</a>
             </Button>
           </Link>
@@ -88,9 +90,12 @@ const checkoutItems = ()=>{
   )}
 
 // return Cart
-  return (
+
+
+  if(user){
+    return (
     <div>
-      <h1> Cart</h1>
+      <h3 style={{fontFamily: 'Anton'}}> Cart</h3>
       <Card style={{ padding: "10px 5px" }} className="cart">
         <CardTitle style={{ margin: 10 }}>Your Order:</CardTitle>
         <hr />
@@ -106,6 +111,7 @@ const checkoutItems = ()=>{
           </div>
           
           {console.log(`Router Path: ${router.asPath}`)}
+
         </CardBody>
       </Card>
       <style jsx>{`
@@ -126,4 +132,9 @@ const checkoutItems = ()=>{
     </div>
   );
 }
+else{
+  return(<div></div>)
+}
+}
+
 export default Cart;
